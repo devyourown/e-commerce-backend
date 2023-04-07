@@ -38,8 +38,10 @@ public class MemberController {
         return MemberDTO.builder()
                 .email(member.getEmail())
                 .id(member.getId())
-                .nickname(member.getNickname())
+                .username(member.getUsername())
                 .token(token)
+                .gender(member.getGender())
+                .birthday(member.getBirthday())
                 .build();
     }
 }

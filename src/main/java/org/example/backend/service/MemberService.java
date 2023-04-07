@@ -20,8 +20,10 @@ public class MemberService {
     public MemberDTO createMember(MemberDTO memberDTO) {
         MemberEntity entity = MemberEntity.builder()
                 .email(memberDTO.getEmail())
-                .nickname(memberDTO.getNickname())
+                .username(memberDTO.getUsername())
                 .password(memberDTO.getPassword())
+                .gender(memberDTO.getGender())
+                .birthday(memberDTO.getBirthday())
                 .build();
         MemberEntity registeredMember = createEncodedMember(entity);
         return memberEntityToDTO(registeredMember);
@@ -46,7 +48,9 @@ public class MemberService {
         return MemberDTO.builder()
                 .id(entity.getId())
                 .email(entity.getEmail())
-                .nickname(entity.getNickname())
+                .username(entity.getUsername())
+                .birthday(entity.getBirthday())
+                .gender(entity.getGender())
                 .build();
     }
 

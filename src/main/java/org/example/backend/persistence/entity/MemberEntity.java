@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.backend.controller.dto.Gender;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,9 +21,13 @@ public class MemberEntity {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     @Column(nullable = false)
-    private String nickname;
+    private String username;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String birthday;
+    @Column(nullable = false)
+    private Gender gender;
 }
