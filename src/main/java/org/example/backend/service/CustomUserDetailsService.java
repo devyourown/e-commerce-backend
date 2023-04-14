@@ -3,6 +3,7 @@ package org.example.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.persistence.MemberRepository;
 import org.example.backend.persistence.entity.MemberEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberEntity member = memberRepository.findByNickname(username);
+        MemberEntity member = memberRepository.findByUsername(username);
         if (member == null)
             throw new UsernameNotFoundException("User is not existed.");
         return new CustomUserDetails(member);

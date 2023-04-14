@@ -20,7 +20,10 @@ public class TokenProvider {
     @Autowired
     private MemberService memberService;
 
-    private final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode("SECRET_KEY"));
+    private static final String SECRET_KEY = "SECRETKEYSADSASASADSASADASADSADSASADSADSADSAASDASDSADADASDSADSDewqeihwdhaskcbxzkjhviuewrlkqwnasdcioZHcoqdwqe6546353242";
+
+
+    private final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
 
     public String createToken(MemberEntity entity) {
         Date expiryDate = Date.from(

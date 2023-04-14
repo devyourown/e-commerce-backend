@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -15,7 +17,17 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
+    private Map<String, String> emailCode = new HashMap<>();
+
+
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public MemberEntity getByEmail(String email) {
+        final MemberEntity entity = memberRepository.findByEmail(email);
+        if (entity == null)
+            throw new IllegalArgumentException("Email is wrong");
+        return entity;
+    }
 
     public MemberDTO createMember(MemberDTO memberDTO) {
         MemberEntity entity = MemberEntity.builder()
@@ -66,5 +78,28 @@ public class MemberService {
         if (original.isPresent())
             return original.get();
         return null;
+    }
+
+    public void makeEmailCode(final String email) {
+        emailCode.put(email, "123456");
+    }
+
+    public MemberEntity matchEmailCode(final String email, final String code) {
+        if (!emailCode.containsKey(email))
+            return null;
+        if (!emailCode.get(email).equals(code))
+            return null;
+        return memberRepository.findByEmail(email);
+    }
+
+    public MemberDTO changePassword(MemberDTO memberDTO) {
+        MemberEntity origin = memberRepository.findByEmail(memberDTO.getEmail());
+        origin.setPassword(memberDTO.getPassword());
+        return memberEntityToDTO(changeEncodedPassword(origin));
+    }
+
+    private MemberEntity changeEncodedPassword(MemberEntity entity) {
+        entity.setPassword(encoder.encode(entity.getPassword()));
+        return memberRepository.save(entity);
     }
 }
