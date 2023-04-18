@@ -1,4 +1,4 @@
-package org.example.backend.service;
+package org.example.backend.service.user;
 
 import org.example.backend.persistence.entity.MemberEntity;
 import org.springframework.security.core.GrantedAuthority;

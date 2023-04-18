@@ -1,4 +1,4 @@
-package org.example.backend.service;
+package org.example.backend.service.member;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.example.backend.persistence.entity.MemberEntity;
-import org.example.backend.service.MemberService;
+import org.example.backend.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

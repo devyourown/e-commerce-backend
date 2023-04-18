@@ -1,4 +1,4 @@
-package org.example.backend.service;
+package org.example.backend.service.member;
 
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.MemberRepository;

@@ -1,9 +1,9 @@
-package org.example.backend.service;
+package org.example.backend.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.backend.persistence.MemberRepository;
 import org.example.backend.persistence.entity.MemberEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.backend.service.user.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.backend.controller.dto.Gender;
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.MemberRepository;
-import org.example.backend.service.MemberService;
+import org.example.backend.service.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

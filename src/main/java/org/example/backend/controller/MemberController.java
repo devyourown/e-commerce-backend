@@ -1,11 +1,11 @@
 package org.example.backend.controller;
 
-import org.example.backend.service.MailService;
-import org.example.backend.service.UserAdapter;
+import org.example.backend.service.mail.MailService;
+import org.example.backend.service.user.UserAdapter;
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.entity.MemberEntity;
-import org.example.backend.service.MemberService;
-import org.example.backend.service.TokenProvider;
+import org.example.backend.service.member.MemberService;
+import org.example.backend.service.member.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
