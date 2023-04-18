@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.backend.controller.dto.Gender;
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.MemberRepository;
+import org.example.backend.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,6 +30,9 @@ class MemberControllerTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private MemberService memberService;
 
     @Test
     @DisplayName("Signup Test")
@@ -76,11 +78,11 @@ class MemberControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    @DisplayName("Match Email Code Test ")
-    public MvcResult testMatchEmailCode() throws Exception {
+    public MvcResult testMatchEmailCodeAndGetResult() throws Exception {
         testFindPassword();
-        String body = mapper.writeValueAsString(makePasswordTestMemberDTO());
+        MemberDTO memberDTO = makePasswordTestMemberDTO();
+        memberDTO.setEmailCode(memberService.getEmailCode(memberDTO.getEmail()));
+        String body = mapper.writeValueAsString(memberDTO);
         return mvc.perform(post("/users/find/password/code")
                 .content(body)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -91,8 +93,10 @@ class MemberControllerTest {
     @Test
     @DisplayName("Change Password Test")
     public void testChangePassword() throws Exception {
-        String token = getBearerToken(testMatchEmailCode());
-        String body = mapper.writeValueAsString(makePasswordTestMemberDTO());
+        String token = getBearerToken(testMatchEmailCodeAndGetResult());
+        MemberDTO memberDTO = makePasswordTestMemberDTO();
+        memberDTO.setEmailCode(memberService.getEmailCode(memberDTO.getEmail()));
+        String body = mapper.writeValueAsString(memberDTO);
         mvc.perform(post("/users/change/password")
                 .content(body)
                         .header("Authorization", token)
@@ -109,7 +113,6 @@ class MemberControllerTest {
     private MemberDTO makePasswordTestMemberDTO() {
         return MemberDTO.builder()
                 .email("test@naver.com")
-                .emailCode("123456")
                 .password("newPassword")
                 .build();
     }

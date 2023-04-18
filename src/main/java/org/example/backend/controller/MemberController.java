@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.service.MailService;
 import org.example.backend.service.UserAdapter;
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.entity.MemberEntity;
@@ -19,6 +20,9 @@ public class MemberController {
 
     @Autowired
     private TokenProvider tokenProvider;
+
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/users/new")
     public ResponseEntity<?> signup(@RequestBody MemberDTO memberDTO) {
@@ -40,8 +44,9 @@ public class MemberController {
         MemberEntity entity = memberService.getByEmail(memberDTO.getEmail());
         if (entity == null)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email");
-        memberService.makeEmailCode(memberDTO.getEmail());
-        return ResponseEntity.ok().body("exists email");
+        String authorizationCode = memberService.makeEmailAuthorizationCode(memberDTO.getEmail());
+        mailService.sendMail(memberDTO.getEmail(), authorizationCode);
+        return ResponseEntity.ok().body("send authorization code");
     }
 
     @PostMapping("/users/find/password/code")

@@ -80,8 +80,11 @@ public class MemberService {
         return null;
     }
 
-    public void makeEmailCode(final String email) {
-        emailCode.put(email, "123456");
+    public String makeEmailAuthorizationCode(final String email) {
+        int code = (int) Math.floor((Math.random() * 899999)+ 100000);
+        String strCode = String.valueOf(code);
+        emailCode.put(email, strCode);
+        return strCode;
     }
 
     public MemberEntity matchEmailCode(final String email, final String code) {
@@ -101,5 +104,9 @@ public class MemberService {
     private MemberEntity changeEncodedPassword(MemberEntity entity) {
         entity.setPassword(encoder.encode(entity.getPassword()));
         return memberRepository.save(entity);
+    }
+
+    public String getEmailCode(String email) {
+        return emailCode.get(email);
     }
 }
