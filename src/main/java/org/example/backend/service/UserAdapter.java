@@ -1,4 +1,4 @@
-package org.example.backend.config;
+package org.example.backend.service;
 
 import org.example.backend.persistence.entity.MemberEntity;
 import org.example.backend.service.CustomUserDetails;

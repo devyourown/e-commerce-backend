@@ -1,6 +1,7 @@
 package org.example.backend.config;
 
 import org.example.backend.service.TokenProvider;
+import org.example.backend.service.UserAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

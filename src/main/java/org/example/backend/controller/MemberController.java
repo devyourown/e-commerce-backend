@@ -1,6 +1,6 @@
 package org.example.backend.controller;
 
-import org.example.backend.config.UserAdapter;
+import org.example.backend.service.UserAdapter;
 import org.example.backend.controller.dto.MemberDTO;
 import org.example.backend.persistence.entity.MemberEntity;
 import org.example.backend.service.MemberService;
