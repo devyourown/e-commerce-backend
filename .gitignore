@@ -44,3 +44,4 @@ bin/
 
 ### password resources ###
 src/main/resources/application.properties
+docs/secret
