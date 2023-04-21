@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
     public Collection<ProductEntity> findByProductIdGreaterThanOrderByProductIdDesc(long productId);
+    public ProductEntity findByProductId(long productId);
 }

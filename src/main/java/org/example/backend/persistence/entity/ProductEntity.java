@@ -22,6 +22,8 @@ public class ProductEntity {
     @Column(nullable = false)
     private long productId;
     @Column(nullable = false)
+    private String imageUrl;
+    @Column(nullable = false)
     private String title;
     @Column(nullable = false)
     private int price;
