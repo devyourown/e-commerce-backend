@@ -29,4 +29,12 @@ class ProductControllerTest {
         MvcResult result = mvc.perform(get("/list")).andReturn();
         result.getResponse().getContentAsString();
     }
+
+    @Test
+    @DisplayName("Get One Product Test")
+    public void testGetProduct() throws Exception {
+        ProductDTO dto;
+        MvcResult result = mvc.perform(get("/list/1")).andReturn();
+        result.getResponse().getContentAsString();
+    }
 }
